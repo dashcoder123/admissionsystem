@@ -1,0 +1,121 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Admission{
+    private:
+    string name[10];
+    long contact[10];
+    public:
+    int i =0;
+    int student_id[10];
+    string branch[10];
+    void newdata() {
+        cout<<"Enter a new student_id\n";
+        cin>>student_id[i];
+        cout<<"Enter name of the applicant\n";
+        cin>>name[i];
+        cout<<"Enter the branch of the applicant\n";
+        cin>>branch[i];
+        cout<<"Enter the contact details\n";
+        cin>>contact[i];
+        i++;
+    }
+    void changedata(){
+        cout<<"Student id of the student whose data needs to be changed:\n";
+        int c_id;
+        cin>>c_id;
+        int index;
+        for(int k=0; k<10;k++)
+        {
+            if(c_id == student_id[k])
+            {
+                index = k;
+                break;
+            }
+        }
+        cout<<"Which information you need to alter:\n1. Name\n2. Branch\n3. Contact\n";
+        int choice;
+        cin>>choice;
+        switch(choice)
+        {
+            case 1: cout<<"Enter new name\n";
+                    char n_name[30];
+                    cin>>n_name;
+                    cout<<"Old name: "<<name[index]<<"\n";
+                    name[index] = n_name;
+                    cout<<"Updated name: "<<name[index]<<"\n";
+                    break;
+            case 2: cout<<"Enter new branch name\n";
+                    char n_branch[30];
+                    cin>>n_branch;
+                    cout<<"Old branch: "<<branch[index]<<"\n";
+                    branch[index] = n_branch;
+                    cout<<"Updated branch: "<<branch[index]<<"\n";
+                    break;
+            case 3: cout<<"Enter new contact details\n";
+                    long n_contact;
+                    cin>>n_contact;
+                    cout<<"Old contact: "<<contact[index]<<"\n";
+                    contact[index] = n_contact;
+                    cout<<"Updated contact: "<<contact[index]<<"\n";
+                    break;
+            default: cout<<"No changes\n";
+        }
+    }
+    void display()
+    {
+        for(int j =0;j<10; j++)
+        {
+            if(name[j]=="")
+            {
+                break;
+            }
+            else{
+                cout<<"Entry"<<j+1<<"\n";
+            cout<<name[j]<<"\t"<<branch[j]<<" "<<contact[j]<<"\n";
+            }
+            
+        }
+    }
+};
+class ViewPortal: public Admission
+{
+    public:
+    void displayinfo()
+    {
+        for(int l =0; l<10; l++)
+        {
+            if(name[l]=="")
+            {
+                break;
+            }
+            else{
+            cout<<"Details of Student "<<l+1<<"\n";
+            cout<<name[l]<<" "<<student_id[l]<<" "<<branch[l]<<"\n";
+            }
+        }
+    }
+};                                                                      
+int main()
+{
+    ViewPortal obj;
+    int n;
+    while(1)
+    {
+        cout<<"WELCOME TO THE ADMISSION PORTAL OF ABC COLLEGE\n";
+    cout<<"1. New Admission for FY \n2. Change data in the system\n3. Only display of essential records\n";
+    cin>>n;
+    switch(n)
+    {
+        case 1: obj.newdata();
+                break;
+        case 2: obj.changedata();
+                break;
+        case 3: obj.display();
+                break;
+        default: cout<<"Thanks for using the system!";
+                 exit(1);
+    } 
+   }
+    return 0;
+}
